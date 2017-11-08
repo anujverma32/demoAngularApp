@@ -1,0 +1,44 @@
+<mat-card class="signed-out-wrapper">
+    <h2 class="full-width text-center">Login</h2>
+    <p class="full-width text-center">Please enter your email and password to login</p>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field class="full-width">
+            <input
+            matInput 
+            placeholder="Email" 
+            type="text" 
+            formControlName="email">
+            <mat-error *ngIf="loginForm.get('email').hasError('email') && loginForm.get('email').value">
+                Please enter a <strong>valid</strong> email
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email').hasError('required') && !loginForm.get('email').value">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('email').hasError('not_found')">
+                Please enter your correct email
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input 
+            matInput 
+            placeholder="Password" 
+            type="password" 
+            formControlName="password">
+            <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('password').hasError('wrong_password')">
+                Your entered password is incorrect.
+            </mat-error>
+        </mat-form-field>
+        <div class="wrapper no-padding">
+            <span class="gap-filler"></span>
+            <a routerLink="/forget-password" mat-button class="" color="warn">Forget Password</a>
+        </div>
+        <div class="btn-wrapper">
+            <button mat-raised-button color="primary" type="submit">Login</button>
+            <span class="gap-filler"></span>
+            <a routerLink="/register" mat-raised-button class="">Register</a>
+        </div>
+    </form>
+</mat-card>

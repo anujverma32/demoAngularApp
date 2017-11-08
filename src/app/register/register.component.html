@@ -1,0 +1,60 @@
+<mat-card class="signed-out-wrapper">
+    <h2 class="full-width text-center">Register</h2>
+    <p class="full-width text-center">Register your account to use Piconnect services for free</p>
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <mat-form-field class="full-width">
+            <input 
+            matInput 
+            placeholder="Full name" 
+            type="text"  
+            formControlName="name">
+            <mat-error *ngIf="registerForm.get('name').hasError('required')">
+                Name is <strong>required</strong>
+            </mat-error> 
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input
+            matInput 
+            placeholder="Email" 
+            type="text" 
+            formControlName="email">
+            <mat-error *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').value">
+                Please enter a <strong>valid</strong> email
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('email').hasError('required') && !registerForm.get('email').value">
+                Email is <strong>required</strong>
+            </mat-error> 
+            <mat-error *ngIf="registerForm.get('email').hasError('already_registred')">
+                This account is <strong>already registred</strong>
+            </mat-error> 
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input 
+            matInput 
+            placeholder="Password" 
+            type="password" 
+            formControlName="password">
+            <mat-error *ngIf="registerForm.get('password').hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error> 
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <input
+            matInput 
+            placeholder="Confirm Password" 
+            type="password" 
+            formControlName="conf_password">
+            <mat-error *ngIf="registerForm.get('conf_password').hasError('required') && !registerForm.get('conf_password').value">
+                Confirm Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="registerForm.get('conf_password').hasError('password_match') && registerForm.get('conf_password').value">
+                Your passwords doesn't <strong>matched</strong>
+            </mat-error> 
+        </mat-form-field>
+        <div class="btn-wrapper">
+            <a routerLink="/login" mat-raised-button >Login</a>
+            <span class="gap-filler"></span>
+            <button type="submit" mat-raised-button color="primary" class="">Register</button>
+        </div>
+    </form>
+</mat-card>
